@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>Exam history</title>
+</head>
+<body bgcolor="FloralWhite">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<a  th:href="@{/}">Home</a>
+  		<a onclick="window.history.back()" >Back</a>
+  		<!--  <a th:href="@{/userpdf(attendExam_id=${attend_exam_id})}">Generate Pdf</a> -->
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+
+<div  align="center">
+<h3>Exam: <span th:text="${attendedExam.exam.name}">exam name</span></h3>
+<h4>Mark: <span th:text="${attendedExam.score}+' / '+${attendedExam.total}">mark</span><br>
+Percentage: <span th:style="${attendedExam.isResult()==true}?'color:#0fe300':'color:red'"
+			 th:text="${attendedExam.percentage}+' ('+(${attendedExam.result}==true? passed:failed)+')'">percentage</span><br></h4>
+date: <span th:text="${attendedExam.getDateTime().toLocalDate()}+' at '+${attendedExam.getDateTime().toLocalTime()}"> Time </span>
+</div>
+<br>
+<div class="container">
+<div align="right"><button class="button button1" onclick="window.print()">Print</button></div>
+ 
+<table width=100% th:each="qstn ,stat : ${attendedExam.exam.questions}">
+    <tbody>
+   
+    <tr th:if="${attendedExam.exam.questions.empty}" align="center">
+            <td colspan="1"> Questions has been revoked </td>
+        </tr>
+        
+        <tr>
+	        <td>
+	        <span th:text="${stat.index+1}+'.'" > Sl.No. </span>&nbsp;
+	        <span th:text="${qstn.getQstn()}"> question</span>
+	        </td>
+        </tr>
+        <tr th:each="q_option,iterator : ${qstn.qstnOptions}">
+            <td th:style="${q_option.isAnswer==true} ?'color:#0fe300':null">
+            	&nbsp;&nbsp;&nbsp;<span th:text="'('+${iterator.index+1}+')'" > optn.No. </span>&nbsp;
+            	<span th:text="${q_option.option}">option</span>
+            </td>
+          </tr>
+           <tr>
+           		<td th:style="${attendedOptions[__stat.index__].attendedAnswer==true} ?'color:#0fe300':'color:red'">
+           			&nbsp;&nbsp;Your Answer:- <span th:text="${attendedOptions[__stat.index__].attendedOpt}"></span> 
+           		</td>
+           </tr>
+           <tr>
+           		<br>
+           </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

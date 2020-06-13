@@ -1,0 +1,40 @@
+{
+    "name": "AttendedOption",
+    "fields": [
+        {
+            "fieldName": "attendedOpt",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "attendedAnswer",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "attendedExam",
+            "otherEntityRelationshipName": "attendedOption",
+            "relationshipName": "attendedExam",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "question",
+            "otherEntityRelationshipName": "attendedOption",
+            "relationshipName": "question",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200407085900",
+    "entityTableName": "attended_option",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

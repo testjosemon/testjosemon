@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Exam Questions</title>
+</head>
+<body>
+<h3>Questions in Exam</h3>
+<table width=100%>
+    <thead>
+        <tr>
+            <th> Sl.No. </th>
+            <th> Question </th>
+            <th> Option1 </th>
+             <th> Option2 </th>
+              <th> Option3 </th>
+             <th> Answer </th>
+              <th> Level </th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${questions.empty}">
+            <td colspan="7"> No Questions Available </td>
+        </tr>
+        <tr th:each="qstn ,iterator : ${questions}" >
+        <td th:text="${iterator.index+1}" > Sl.No. </td>
+            <td th:text="${qstn.getQstn()}"> Question </td>
+            <td th:text="${qstn.getOption1()}"> Option1 </td>
+            <td th:text="${qstn.getOption2()}"> Option2 </td>
+            <td th:text="${qstn.getOption3()}"> Option3 </td>
+            <td th:text="${qstn.getAnswer()}"> Answer </td>
+            <td th:text="${qstn.getLevel()}"> Level </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

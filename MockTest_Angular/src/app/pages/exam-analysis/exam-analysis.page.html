@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Exam Analysis</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div  *ngIf="exam ;else noExamDataFoundTemplate ">
+<ion-card *ngFor="let data of exam" color="light" button (click)="examDetaills(data.id)">
+  <ion-card-content>
+    <ion-text  class="ion-text-center">
+      {{data.name}}
+    </ion-text>
+    
+  </ion-card-content>
+</ion-card>
+</div>
+
+  <ng-template #noExamDataFoundTemplate>
+    
+    <!-- <ion-card  color="light">
+      No Current Exam Data Found
+    </ion-card> -->
+   <br> <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    
+  </ng-template>
+</ion-content>

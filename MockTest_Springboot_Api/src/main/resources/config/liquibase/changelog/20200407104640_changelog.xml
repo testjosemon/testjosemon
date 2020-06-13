@@ -1,0 +1,18 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="kpmuh (generated)" id="1586256425476-1">
+        <addForeignKeyConstraint baseColumnNames="question_id" baseTableName="attended_option" constraintName="FK9pendli2urjgq6c83p3htf9gf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="question" validate="true"/>
+    </changeSet>
+    <changeSet author="kpmuh (generated)" id="1586256425476-2">
+        <addForeignKeyConstraint baseColumnNames="user_extra_id" baseTableName="attended_exam" constraintName="FKb2fkoi0t0n9q8irewqbi7i8qc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_extra" validate="true"/>
+    </changeSet>
+    <changeSet author="kpmuh (generated)" id="1586256425476-3">
+        <addForeignKeyConstraint baseColumnNames="attended_exam_id" baseTableName="attended_option" constraintName="FKjv5t14cdumc8fv9d2sl3dc6k6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="attended_exam" validate="true"/>
+    </changeSet>
+    <changeSet author="kpmuh (generated)" id="1586256425476-4">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="user_extra" constraintName="FKlq95v3mpj1gjo80ugr9oqoi0h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="kpmuh (generated)" id="1586256425476-5">
+        <addForeignKeyConstraint baseColumnNames="exam_id" baseTableName="attended_exam" constraintName="FKorls1yrqm4gmjyvvvs9hqya5g" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="exam" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

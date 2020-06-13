@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>exam analysis</title>
+
+</head>
+<body bgcolor="FloralWhite">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<a  th:href="@{/}">Home</a>
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+
+<div align="center">
+   <h3>Current exams in database</h3>
+</div>
+<div align="center">
+	<div class="container">
+	
+	
+		
+			<span th:if="${exams.empty}" >
+				No Exams Available
+			</span>
+			
+			<span  th:each="exam: ${exams}">
+				
+					<span>
+						<a th:href="@{/exam_attended(eId=${exam.id})}" class="button button1 lengthbtn" >
+							<h3 th:text="${exam.name}">exam</h3>
+						</a></span>
+					
+				</span>
+
+	
+ </div>
+ 
+	</div>
+</body>
+</html>

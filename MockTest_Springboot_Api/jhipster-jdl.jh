@@ -1,0 +1,49 @@
+entity Question {
+	level String
+    qstn String
+}
+
+entity QstnOption {
+	option String,
+	isAnswer Boolean
+}
+
+entity AttendedOption{
+	attendedOpt String,
+	attendedAnswer Boolean
+}
+
+entity UserExtra{
+}
+
+entity Exam{ 
+	name String,
+    count Integer,
+    level String,
+    isActive Boolean,
+    time String
+}
+
+entity AttendedExam {
+	score Integer,
+    total Integer,
+    result Boolean,
+    percentage Float,
+    dateTime ZonedDateTime
+}
+
+relationship OneToMany {
+	Question to QstnOption,
+    Exam to AttendedExam,
+    UserExtra to AttendedExam,
+    AttendedExam to AttendedOption,
+    Question to AttendedOption
+}
+
+relationship OneToOne {
+	UserExtra to User
+}
+
+relationship ManyToMany{
+	Exam to Question
+}

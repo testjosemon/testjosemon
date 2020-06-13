@@ -1,0 +1,46 @@
+{
+    "name": "Question",
+    "fields": [
+        {
+            "fieldName": "level",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "qstn",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "qstnOption",
+            "otherEntityRelationshipName": "question",
+            "relationshipName": "qstnOption"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "attendedOption",
+            "otherEntityRelationshipName": "question",
+            "relationshipName": "attendedOption"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "exam",
+            "otherEntityRelationshipName": "question",
+            "relationshipName": "exam",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200323145100",
+    "entityTableName": "question",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

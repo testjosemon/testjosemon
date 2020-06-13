@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>All Questions</title>
+
+</head>
+
+<body bgcolor="FloralWhite">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		<a  th:href="@{/}">Home</a>
+		<a onclick="window.history.back()">back</a>
+<a class="logout" th:href="@{/logoutpage}">logout</a></div></div>
+
+<div align="center">
+<br>
+<h2 th:text="${message}"></h2>
+
+</div>
+
+
+<table width=100% border=1px>
+    <thead>
+        <tr>
+            <th> Sl.No. </th>
+            <th> Question </th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${questions.empty}" align="center">
+            <td colspan="3"> No Questions Available </td>
+        </tr>
+        
+        <tr th:each="qstn ,iterator : ${questions}" align="center">
+        <td th:text="${iterator.index+1}" > Sl.No. </td>
+            <td> 
+            <h3><span th:text="${qstn.getQstn()}">qstn</span><br></h3>
+	            <span th:each="q_option : ${qstn.qstnOptions}">
+	            	<span th:text="${q_option.option}">option</span><br>
+	            	</span><br>
+            	</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<div align="center">
+<form action="/app/viewall_qstn">
+	<input type="submit" value="ok" class="button button1">
+</form>
+</div>
+</body>
+</html>

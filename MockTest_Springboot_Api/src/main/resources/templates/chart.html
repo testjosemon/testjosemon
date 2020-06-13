@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  >
+<meta charset="ISO-8859-1">
+<title>Graphical Performance of Candidates</title>
+<script th:inline="javascript" src="js/highcharts.js"></script>
+
+	<script th:inline="javascript" src="js/jquery.js"></script>
+	<link rel="stylesheet" th:href="@{/css/main.css}"
+		href="../../css/main.css" />
+</head>
+<body bgcolor="FloralWhite">
+<div class="header">
+    <h2>MockTest Application</h2>
+    <div class="topnav">
+        <a class="active" >Lxi Technologies</a>
+        
+        <a  th:href="@{/}">Home</a>
+        <a onclick="window.history.back()">back</a>
+        <!--  <a  th:href="@{/exam_attended}">back</a> -->
+        <a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+
+                                <h3 th:text=" 'Performance of candidate in '+${exam.getName()}"> </h3>
+                               <h5  th:text="'Total Mark: '+${exam.getCount()}"></span></h5>
+                               
+<div id="container1" style="height: 300px"></div>
+    
+
+    
+
+    	
+   <script  th:inline="javascript" >
+	Highcharts.chart('container1', {
+	    chart: {
+	        type: 'line',
+	      
+	    },
+	    
+	    title: {
+	        text: 'Candidate Performance '
+	    },
+	
+	    xAxis: {
+	    	
+	        categories: [[${users}]]
+	    },
+	    yAxis: {
+	        title: {
+	          text: 'Scores achieved by candidates'
+	        }
+	      },
+	    tooltip: {
+	        formatter: function() {
+	          return '<strong>'+this.x+': </strong>'+ this.y;
+	        }
+	    },
+	
+	    series: [{
+	    	 name: 'candidates Level',
+	        data:  [[${scores}]]
+	    }]
+	});
+
+
+
+    
+    </script>
+</body>
+</html>

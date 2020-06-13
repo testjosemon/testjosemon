@@ -1,0 +1,33 @@
+{
+    "name": "QstnOption",
+    "fields": [
+        {
+            "fieldName": "option",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isAnswer",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "question",
+            "otherEntityRelationshipName": "qstnOption",
+            "relationshipName": "question",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200323145200",
+    "entityTableName": "qstn_option",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

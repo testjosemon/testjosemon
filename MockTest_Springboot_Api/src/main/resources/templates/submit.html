@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>user result</title>
+</head>
+<body bgcolor="FloralWhite">
+
+<div class="header">
+<div align="center">
+	<h2> MockTest Application</h2>
+	
+	</div>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		<a  th:href="@{/}">Home</a>
+  		 <a th:href="@{/examCertificate(id=${attendedExam.id})}">Certificate </a>
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+
+<div class="container">
+<div align="center">
+<h2>You Completed Successfully..!</h2><h3>mark sheet of &nbsp;<span th:text="${username}"></span></h3>
+
+	
+<div>
+<table width=50% th:object="${attendedExam}">
+	<tr>
+		<th>score</th>
+		<th>total</th>
+		<th>percentage</th>
+		<th>result</th>
+	</tr>
+        <tr align="center">
+        	<td th:text="${attendedExam.getScore()}"></td>
+        	<td th:text="${attendedExam.total}"></td>
+        	<td th:text="${attendedExam.percentage}"></td>
+        	<td th:text="${attendedExam.result}==true? pass:fail"></td>
+        </tr>
+</table>
+</div>
+<div align="right"><a th:href="@{/exam_history(aExamId=${attendedExam.id},userid=${userid})}">Exam Review</a></div>
+</div>
+</div>
+</body>
+</html>

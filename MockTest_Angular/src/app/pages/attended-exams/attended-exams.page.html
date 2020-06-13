@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>AttendedExams</ion-title>
+    <ion-buttons slot="end">
+      <ion-button icon-only (click)="switchStyle()">
+        <ion-icon name="bulb"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    
+<div class="ion-text-center">
+  <br>
+*click on the exam to see the corresponding exam attended for further analysis</div><br><br>
+         				  <table align="center" width=95% border=3px style="font-size: 100%">
+							    <thead>
+							        <tr>
+							            <th> Sl.No. </th>
+							            <th> Exam Name </th>
+							            <th> Your Score </th>
+							              <th> Percentage </th>
+							              <th> Result </th>
+							              <th> Date </th>
+							          </tr>
+                                  </thead>
+                                  <tbody>
+                                    
+                                    <tr  *ngFor="let d of data?.attendedExamList ,index as i;">
+                                     <td>{{i+1}}</td> 
+                                     <td><a  (click)="examHistory(d?.exam?.id)">{{d?.exam?.name}}</a></td>
+                                     <td>{{d?.score}} / {{d?.total}}</td>
+                                     <td>{{d?.percentage}}</td>
+                                      <td> {{d?.result==true ? 'pass' :'fail'}}</td> 
+                                    <td>{{d?.dateTime}}</td>
+                                    </tbody>
+                   </table>
+</ion-content>

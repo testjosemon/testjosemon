@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>Mocktest Application</title>
+</head>
+<body bgcolor="FloralWhite" th:onload="([[${err}]])">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<a th:href="@{/register}">Register</a>
+  
+  	
+  	<div align="right">
+  	<form th:action="@{/login}" class="form-container"  method="post">
+  
+    <input type="text" id="un" placeholder="Enter username" name="username" class="input button2 " required>
+	
+    <input type="password" id="pass" placeholder="Enter Password" name="password" class="input button2 " required>
+
+    <button type="submit" onclick="verify()" class="button button1 ">Login</button>
+  
+  	</form>
+  	</div>
+  	</div></div>
+</body>
+</html>

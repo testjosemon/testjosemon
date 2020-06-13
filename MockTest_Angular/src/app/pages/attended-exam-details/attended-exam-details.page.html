@@ -1,0 +1,109 @@
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>AttendExamDetails</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical" (click)="presentPopover($event)"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+  <!-- <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button color="dark">
+      <ion-icon name="caret-up"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="light">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-google"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab> -->
+
+  <ion-content>
+    
+   
+
+    <div  *ngIf="attendedExamData; else noDataTemplate">
+    <ion-text color="medium" class="ion-text-center">
+    <h1> {{attendedExamData?.exam?.name}}</h1>
+    <h3>Status:{{attendedExamData?.exam?.isActive==true ? 'Active-Now' : 'Not-Active'}}</h3>
+    </ion-text>
+
+<h5>*click on the username to see the corresponding details for further analysis</h5><br><br>
+       <div style="overflow-x:auto;">
+
+      
+
+
+                   <mat-table [dataSource]="dataSource1" class="mat-elevation-z8"  matSort >
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" >   </tr>    
+
+                    <ng-container matColumnDef="index">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl.No  </th>
+                      <td mat-cell *matCellDef="let element,let i = index;"> {{i+1}}  </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="user" >
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> User  </th>
+                       <td mat-cell *matCellDef="let element"><a  (click)="examHistory(attendedExamData.exam.id,element.user.id)" class="mat-row-link"> {{element.user.login}} </a> </td>
+                    </ng-container>
+                   
+                    <ng-container matColumnDef="score">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> score </th>
+                      <td mat-cell *matCellDef="let element"> {{element.score}} / {{element.total}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="percentage">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Percentage  </th>
+                   <td mat-cell *matCellDef="let element"> {{element.percentage}}  </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="result">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Result  </th>
+                      <td mat-cell *matCellDef="let element"> {{element.result ==true? 'passed' :'failed'}}  </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="dateTime">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> DateTime  </th>
+                      <td mat-cell *matCellDef="let element"> {{element.dateTime}}  </td>
+                    </ng-container>
+                   </mat-table>
+                  </div>
+                </div>
+
+                  <mat-card *ngIf="isLoading" 
+                 style="display: flex; justify-content: center; align-items: center">
+                 <mat-progress-spinner 
+                  color="primary" 
+                   mode="indeterminate">
+                  </mat-progress-spinner>
+                  </mat-card>
+
+                  <ng-template #noDataTemplate>
+                    <div  *ngIf="isEmpty">
+                      <ion-text color="medium" class="ion-text-center">
+                     <h1> No data !!! </h1>
+                      </ion-text>
+                      </div>
+                  </ng-template>
+                 
+                
+</ion-content>

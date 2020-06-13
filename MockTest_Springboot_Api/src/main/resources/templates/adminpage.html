@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+</head>
+
+<body bgcolor="FloralWhite" th:onload="check([[${success}]])">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		<a th:href="@{/app/create_question}">Create Question</a>
+			<a th:href="@{/app/viewall_qstn}">All Questions</a>
+			<a th:href="@{/app/create_exam}">Create Exam</a> 
+			<a th:href="@{/current_exams}">Current Exams</a>
+			<a th:href="@{/activeExams}">Preview</a> 
+		<a th:href="@{/exam_info}">Exam Analysis</a>
+		<a align="right" th:href="@{/user_info}">User Details</a>
+  		
+  		<a class="logout" th:href="@{/logoutpage}">Logout</a></div>
+  </div>
+ 
+		
+			
+		</div>
+  	<div class="container" style="height: 300px">
+  	 <div align="center">
+		<h1 >Welcome Admin</h1></div>
+		
+		<!-- <div align="center">
+			<a th:href="@{/app/create_question}"><button class="button button1">Create Question</button></a> &nbsp;&nbsp;
+			<a th:href="@{/app/viewall_qstn}"><button class="button button1">All questions</button></a>
+		</div>
+		<br><br><br>
+		<div align="center">
+			<a th:href="@{/app/create_exam}"><button class="button button1">Create Exam</button></a> &nbsp;&nbsp;
+			<a th:href="@{/current_exams}"><button class="button button1">Current Exams</button></a>
+		</div>
+		<br><br><br>
+		<div align="center">
+		<a th:href="@{/activeExams}"><button class="button button1">Test the exam</button></a> &nbsp;&nbsp;
+		<a th:href="@{/exam_info}"><button class="button button1">Exam analysis</button></a> 
+		</div>
+		<br><br><br>
+	<div align="center">
+	<a th:href="@{/user_info}"><button class="button button1">User Details</button></a> </div> -->
+<script>
+function check(success){ if(success) alert(" Exam created ! ") }
+</script>
+</body>
+</html>

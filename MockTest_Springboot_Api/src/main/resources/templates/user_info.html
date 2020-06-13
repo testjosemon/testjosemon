@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>user detail</title>
+</head>
+<body bgcolor="FloralWhite">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<a  th:href="@{/}">Home</a>
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+
+<div align="center">
+  <!--  <h3>Current exams in database</h3> -->
+</div>
+<div align="center">
+	
+	<h3>Current  Users</h3>
+	<div class="container">
+	
+	<span th:if="${users.empty}" >
+				No Current users are there..!
+			</span>
+			
+	<span th:if="!${users.empty}" >
+		<span  th:each="user: ${users}">
+					<span>
+						<a th:href="@{/user_details(id=${user.id})}" class="button button1 lengthbtn" >
+							<h3 th:text="${user.firstName}+' '+${user.lastName}">username</h3>
+						</a>
+					</span>
+					
+				</span>
+		</span>
+	</div></div>
+	
+</body>
+</html>

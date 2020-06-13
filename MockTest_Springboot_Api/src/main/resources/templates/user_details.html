@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>User Details</title>
+</head>
+<body bgcolor="FloralWhite">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<a  th:href="@{/}">Home</a>
+  		<a  th:href="@{/user_info}">Users</a>
+  		<a th:href="@{/userPerformance(user_id=${user.id})}">Performance Level</a>
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+  <div align="center">
+		
+			<h3>User Details Of <span th:text="${user.getUser().getFirstName()}+' '+${user.getUser().getLastName()}"></h3>
+		</div>
+  	
+  	<div class="profilecontainer">
+  		First Name:&nbsp;&nbsp;<span th:text="${user.getUser().getFirstName()}"></span><br>
+	  	Last Name:&nbsp;&nbsp;<span th:text="${user.getUser().getLastName()}"></span><br>
+	  	Email&nbsp;&nbsp;:&nbsp;&nbsp;<span th:text="${user.getUser().getEmail()}"></span><br><br>
+	  	</div>
+	  	<div class=examcontainer>
+	  		<span th:if="${AttendedExamList.empty}">
+    				<h4>  This  User not attended any exams </h4>
+    				 </span>
+    				   
+    				   <span th:if="!${AttendedExamList.empty}">
+    				   <h3>User Attended Exam Details</h3>
+    				   <div align="center">
+					  	<form action="/user_details">
+							<select name="sort" class="select1 button2">
+									<option value="date">date attended</option>
+									<option value="percent">percentage</option>
+								</select>
+								<input type="hidden" name="id" th:value="${user.id}">
+								<input type="submit" value="sort" class="button button1 ">
+								</form>
+					  	</div>
+					  	<span>*click on the exam to see the corresponding exam attended for further analysis</span>
+         				   <table width=100% border=1px style="font-size: large">
+							    <thead>
+							        <tr>
+							            <th> Sl.No. </th>
+							            <th> Exam Name </th>
+							            <th>  Score </th>
+							              <th> Percentage </th>
+							              <th> Result </th>
+							              <th> Date</th>
+							          </tr>
+                                  </thead>
+                                  <tbody>
+             					<tr th:each="atndexam ,iterator : ${AttendedExamList}" align="center">
+       							 <td th:text="${iterator.index+1}" > Sl.No. </td>
+          						   <td>
+          						   		<a th:href="@{/exam_history(aExamId=${atndexam.id},userid=${user.id})}" th:text="${atndexam.exam.name}"></a>
+          						   </td>
+         							 <td th:text="${atndexam.getScore()}+'/'+${atndexam.getTotal()}"> Score </td>
+         							   <td th:text="${atndexam.getPercentage()}"> Percentage </td>
+         							    <td> 
+         							      <span th:style="${atndexam.isResult()==true}?'color:#0fe300':'color:red'" th:text="${atndexam.isResult()==true}? Pass:Fail"> </span>
+      				  					</td>
+      				  					<td th:text="${atndexam.getDateTime().toLocalDate()}"> Date </td>
+         				  			</tr>
+         				  		</tbody>
+         				  </table>
+         				  </span>
+	  		</div>  	
+
+</body>
+</html>

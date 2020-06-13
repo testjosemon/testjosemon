@@ -1,0 +1,58 @@
+{
+    "name": "AttendedExam",
+    "fields": [
+        {
+            "fieldName": "score",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "total",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "result",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "percentage",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "dateTime",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "attendedOption",
+            "otherEntityRelationshipName": "attendedExam",
+            "relationshipName": "attendedOption"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "exam",
+            "otherEntityRelationshipName": "attendedExam",
+            "relationshipName": "exam",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "userExtra",
+            "otherEntityRelationshipName": "attendedExam",
+            "relationshipName": "userExtra",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200323145600",
+    "entityTableName": "attended_exam",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

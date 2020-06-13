@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>create exam</title>
+</head>
+<body bgcolor="FloralWhite" th:onload="check([[${err}]])">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<a  th:href="@{/}">Home</a>
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+
+
+
+
+<div align="center">
+   <h3>Exam Creation </h3>
+</div>
+
+<div class="container" style="height: 300px">
+
+
+		<form  th:action="@{/app/save_exam}" th:object="${exam}" >
+			
+					<label for="name">Enter name of this exam:</label>
+					<input type="text" id="name" th:field="*{name}"  class="input button2 lengthbtn"  required /><br>
+					<font color="red"> <span  th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></font><br><br>
+					
+					<label for="num">Enter no. of questions needed:</label>
+					<input type="text" id="count" th:field="*{count}"  class="input button2 lengthbtn"  required /><br>
+					<!-- <font color="red"> <span  th:if="${#fields.hasErrors('count')}" th:errors="*{count}"></span></font><br> -->
+					
+					<label for="level">Level:</label>
+					<select name="level" th:field="*{level}"  class="select button2 lengthbtn"  >
+							<option th:value="beginner">Beginner Level</option>
+							<option th:value="intermediate">Intermediate Level</option>
+							<option th:value="expert">Expert Level</option>
+					</select><br><br>
+				 	
+					<label for="time">Time:</label>
+					<!-- <input type="time"  name="time"  class="input button2 lengthbtn" /> -->
+					Hour:<select class="select1 button2" name="hour"  >
+    				<option th:each="i : ${#numbers.sequence(0, 12)}" th:value="${i}" th:text="${i}" ></option>
+					</select>
+					Minute:<select	class="select1 button2" name="minute" >
+    				<option th:each="i : ${#numbers.sequence(0, 60)}" th:value="${i}" th:text="${i}" th:selected="${i}"></option>
+					</select>
+				
+			
+			<div align="center"><input type="submit" value="Submit"  class="button button1" onclick="alert_creation()" />
+			</div>
+		</form>
+	</div>
+</body>
+
+<script >
+function alert_creation()
+{
+	var name = document.getElementById("name").value;
+	var count = document.getElementById("count").value;
+	if(!name || !count) { alert("Please provide appropriate values");}  checkcount();
+	if(isNaN(count)){ alert("please provide an integer value for count")}
+	else alert("Exam created");
+	
+	
+}
+function check(err){ if(err) alert(" you have some errors ! ") }
+function checkcount()
+{
+	if(document.getElementById("count").value.length>3)
+		alert("please reduce count No..!");}
+</script>
+</html>

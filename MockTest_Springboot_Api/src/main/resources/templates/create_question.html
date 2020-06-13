@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>Question creation</title>
+</head>
+<body bgcolor="FloralWhite" th:onload="check([[${err}]])">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<a  th:href="@{/}">Home</a>
+  		<form  action="/app/question_file" enctype="multipart/form-data" method="post">
+				<input  class="button button1" type="file" name="file">
+				<input class="button button1" onClick="alert_file()" type="submit" value="import csv file">
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></form></div>
+  </div>
+
+<div align="center">
+
+   <h2>Question Creation</h2>
+ **format of file - question, level(beginner/intermediate/expert), option1, option2, option3 or <a href="/app/model.csv">fill csv file and upload</a> 
+</div>
+
+<div align="center">
+	
+</div>
+<br>
+
+<div class="container">
+<form  th:object="${question}" >
+           	Level
+			<select name="level" class="select button2 lengthbtn" th:field="*{level}" >
+				<option th:value="beginner">Beginner</option>
+				<option th:value="intermediate">Intermediate</option>
+				<option th:value="expert">Expert</option>
+			</select><br><br>
+       		Question
+       		<input type="text" id="quest" class="input button2 lengthbtn" placeholder="Enter Question.." th:field="*{qstn}" required/>
+       		<font color="red"> <span  th:if="${#fields.hasErrors('qstn')}" th:errors="*{qstn}"></span></font><br><br>
+       		Option1
+       		<input type="text" id="opt1" class="input button2 lengthbtn" placeholder="Enter first option.." th:name="opt1" required/>
+       		<font color="red"> <span  th:if="${#fields.hasErrors('qstnOptions')}" th:errors="*{qstnOptions}"></span></font><br><br>
+       		
+       		Option2
+       		<input type="text" id="opt2" class="input button2 lengthbtn" placeholder="Enter second option.." th:name="opt2"  required/>
+       		<font color="red"> <span  th:if="${#fields.hasErrors('qstnOptions')}" th:errors="*{qstnOptions}"></span></font><br><br>
+       		
+       		Option3
+       		<input type="text" id="opt3" class="input button2 lengthbtn" placeholder="Enter third option.." th:name="opt3" required/>
+       		<font color="red"> <span  th:if="${#fields.hasErrors('qstnOptions')}" th:errors="*{qstnOptions}"></span></font><br><br>
+        
+	<div align="center">
+       	<input type="submit" class="button button1 " value="Add" onclick="alert_func()" formaction="/app/add_question?'qid=question.getId();'"/>
+       	<input type="submit" class="button button1 " value="Add More"  onclick="alert_func()" formaction="/app/addmore_question">
+	</div>
+</form> 
+</div>
+<br>
+
+
+<script th:inline="javascript">
+function alert_func() {
+	
+	var quest = document.getElementById("quest").value;
+	var opt1 = document.getElementById("opt1").value;
+	var opt2 = document.getElementById("opt2").value; 
+	var opt3 = document.getElementById("opt3").value;
+	
+    if(!quest || !opt1 || !opt2 || !opt3) {
+		alert("Please fill the appropriate values"); }
+   if(quest.length>6){  alert("Question created Successfully");}
+	}
+	
+function check(err){ if(err) alert(" you have some errors ! ") }
+
+function alert_file() {
+	  alert("Successfully uploaded");
+	}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>attended exam details</title>
+</head>
+<body bgcolor="FloralWhite">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<a  th:href="@{/}">Home</a>
+  		 <a th:href="@{/examDetailsPDF(Exam_id=${exam.id})}">Export PDF</a>
+  		<a th:href="@{/graph(Exam_id=${exam.id})}">Graphical Analysis</a>
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+
+<div align="center">
+ <h3>attended exam details of exam: <span th:text="${exam.name}">exam</span></h3>
+			exam still active: <span th:text="${exam.isActive}">state</span><br>
+			<form action="/exam_attended">
+			<select name="sort" class="select1 button2">
+					<option value="date">date attended</option>
+					<option value="percent">percentage</option>
+					<option value="user">user</option>
+				</select>
+				<input type="hidden" name="eId" th:value="${exam.id}">
+				<input type="submit" value="sort" class="button button1 " >
+				</form>
+</div>
+
+<div align="center">
+	
+	
+		<table width=100% border=1px style="font-size: 135%">
+		<thead>
+			<tr>
+	            <th> Sl.No. </th>
+	            <th> user </th>
+	             <th> score </th>
+	              <th>result</th>
+	              <th>percentage</th>
+	               <th> Date </th>
+					 <th>Time</th>
+	        </tr>
+		</thead>
+			<tr th:if="${attendList.empty}" align="center">
+				<td colspan="7">No Exams Available</td>
+			</tr>
+			<tr align="center" th:each="attended,iterator: ${attendList}">
+				<td th:text="${iterator.index+1}" > Sl.No. </td>
+				<td>
+					
+					<span th:each="user:${users}" >
+						<a th:href="@{/exam_history(aExamId=${attended.id},userid=${user.id})}" th:text="${(attended.userExtra.id==user.id)}? ${user.login}:null">
+							
+						</a>
+					</span>
+				</td>
+				<td th:text="${attended.score}+'/'+${attended.total}">score</td>
+				<td th:style="${attended.isResult()==true}?'color:#0fe300':'color:red'" 
+						th:text="${attended.result==true}? Pass:Fail">result</td>
+				<td th:text="${attended.percentage}">percentage</td>
+				<td th:text="${attended.getDateTime().toLocalDate()}"> Date </td>
+         		<td th:text="${attended.getDateTime().toLocalTime()}"> Time </td>
+			</tr>
+		</table>
+
+	</div>
+</div>
+</body>
+</html>

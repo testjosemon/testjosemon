@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>All Questions</title>
+
+</head>
+
+<body bgcolor="FloralWhite">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		<a  th:href="@{/}">Home</a>
+  		<a  th:href="@{/app/create_question}">Add Question</a>
+  		
+
+<form th:action="@{/app/filter}" autocomplete="off">
+	<span th:each="qstn: ${questions}"></span>
+	<select name="level" class="select1 button2">
+	<option type="text" value="--select--" >--select--</option>
+	<option type="text" name="Beginner" >Beginner</option>
+	<option type="text" name="Intermediate">Intermediate </option>
+	<option type="text" name="Expert" >Expert </option>
+	</select>
+	<input type="submit" class="button button1" value="filter"> 
+	<input type="text" class="input button2" id="myInput" th:name="searchQstn"/> 
+	<input type="submit" class="button button1" value="Search here" formaction="/app/searchQstn">
+
+<a class="logout" th:href="@{/logoutpage}">logout</a></form></div></div>
+
+<div align="center">
+<h3>All Question in Database</h3>
+
+</div>
+
+<form action="/app/delete_question">
+<table width=100% border=1px>
+    <thead>
+        <tr>
+            <th> Sl.No. </th>
+              <th>select</th>
+            <th> Question </th>
+              <th> Answer </th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${questions.empty}" align="center">
+            <td colspan="6"> No Questions Available </td>
+        </tr>
+        
+        <tr th:each="qstn ,iterator : ${questions}" align="center">
+        <td th:text="${iterator.index+1}" > Sl.No. </td>
+        	<td>
+           		<input type="checkbox" th:value="${qstn.id}" th:name="qId">
+           	</td>
+            <td> 
+            <h3><span th:text="${qstn.getQstn()}">qstn</span><br></h3>
+	            <span th:each="q_option : ${qstn.qstnOptions}">
+	            	<span th:text="${q_option.option}">option</span>&nbsp;
+		            	<a th:href="@{/app/set_Answer(opt_Id=${q_option.getId()},qstn_id=${qstn.getId()})}" >
+	            			Set <span th:text="!${q_option.isIsAnswer()}"></span><br>
+	            		</a>
+	            	</span><br>
+            	</td>
+	            <td>
+	            	<span th:each="q_option : ${qstn.qstnOptions}">
+	            		<span th:if="${q_option.isIsAnswer() == true}" th:text="${q_option.option}+','"></span><br>
+	            	</span>
+	           	</td>
+        </tr>
+    </tbody>
+
+	</table><br>
+	<div align="center">
+		<input type="submit" class="button button1" onclick="alert_this()" value="delete selected">
+	</div>
+</form>
+<script> function alert_this()
+{ alert("Are you want to Delete")}</script>
+</body>
+</html>

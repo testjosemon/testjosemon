@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body bgcolor="FloralWhite">
+<div class="header">
+	
+
+  	<div class="container" style="height: 300px"> 
+					
+	<div align="center">
+   <h1>Do you want to logout? </h1><br>
+   <a th:href="@{/logout}"><button class="button button1">logout</button></a> 
+</div>
+</body>
+</html>

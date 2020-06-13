@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>question</ion-title>
+  </ion-toolbar>
+</ion-header>
+<br>
+
+<ion-content class="ion-text-center">
+  <ion-button [routerLink]="['/create-question']">
+    <ion-icon slot="start" name="add"></ion-icon>
+   create
+  </ion-button>
+  <br><br>
+  <ion-button [routerLink]="['/all-questions']" >
+    <ion-icon slot="start" name="expand"></ion-icon>
+   all questions
+  </ion-button>
+ 
+</ion-content>

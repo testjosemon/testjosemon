@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="UTF-8">
+<title>start page</title>
+<script> 
+var deadline = new Date("mar 20, 2020 5:15:25").getTime(); 
+var x = setInterval(function() { 
+var now = new Date().getTime(); 
+var t = deadline - now; 
+var days = Math.floor(t / (1000 * 60 * 60 * 24)); 
+var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
+var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
+var seconds = Math.floor((t % (1000 * 60)) / 1000); 
+document.getElementById("demo").innerHTML = days + "d "  
++ hours + "h " + minutes + "m " + seconds + "s "; 
+    if (t < 0) { 
+        clearInterval(x); 
+        document.getElementById("demo").innerHTML = "TIME OUT"; 
+    } 
+}, 1000); 
+</script>	
+</head>
+
+<!-- Time:- <span th:text="${exam.getTime_hr()} "></span>hr <span
+			th:text="${exam.getTime_min()} "></span>min<br> --> 
+<body bgcolor="FloralWhite">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<!-- <a th:href="@{/user_startpage}">Active Exams</a> -->
+  		<a  th:href="@{/}">Home</a>
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+  <div align="center">
+		
+			<h3>Welcome user</h3>
+		</div>
+  	<div class="container">
+					
+						<span th:if="${exam_list.empty}">
+         				   No Active Exams Available </span>
+         				  
+         				
+         				  
+         				  <div>
+         				  <span th:if="!${exam_list.empty}"> Select your Test
+						<br>
+						<br> 
+						 <span th:each="exam: ${exam_list}"> 
+						 
+						 <button class="button button1 lengthbtn">
+						 <a th:href="@{/user_instruction(eId=${exam.getId()})}" >
+						 <span th:text="${exam.getName()}"></span>
+						 </a></button><br><br>
+						 
+					</div>
+						 <!-- <select name="active_exam" > -->
+							<!-- <option th:value="${exam.getName()}"><span th:text="${exam.getName()}"> </span></option> -->		
+		</span>
+		
+		</div>
+
+
+
+</body>  
+</html>

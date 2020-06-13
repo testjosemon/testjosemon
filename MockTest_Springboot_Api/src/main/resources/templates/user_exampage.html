@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+<title>mock test  </title>
+</head>
+<body bgcolor="FloralWhite">
+<div class="header">
+<div align="right">
+	<span id="timerValue" style="color: red; font-size: x-large;font-weight: bold;"></span> minutes left
+</div>
+<div align="center" >
+	<h2 th:text="${exam.getName()} "> exam name</h2>
+	
+			<h2><span id="qstnNo" style="color: blue">qstnNo</span></h2>
+			</div>
+			
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		
+  		<a  th:href="@{/exam_cancel(aExamId=${aExamId})}" onClick="quitExam()">Home</a>
+  		<a class="logout" th:href="@{/logoutpage}">logout</a></div>
+  </div>
+
+<div class="container">
+
+<form id="myForm" th:object="${iterator}"  th:action="@{/user_exampage}">
+
+<input type="hidden" id="timer"  name="timerValue" value=${timerValue}/>
+
+
+<div class="bubble-container">
+	 <span th:each="qstn ,stat : ${exam.questions}">
+ 		<span class="bubble" th:if="${attendedOptions==null}"  th:text="${stat.index+1}" ></span>
+	  		 <a th:if="!${attendedOptions==null}" 
+			  	th:onclick="showQuestion( [[${aExamId}]] ,  [[${exam.getId()}]] , [[${stat.index}]])"
+	  			class="bubble" th:style="${attendedOptions[__stat.index__].attendedOpt==null}?'background:#ffff99':'background:lime'" >
+	  			 <span th:text="${stat.index+1}" ></span></a>
+	  	</span>
+		<div>
+			<input type="submit" value="submit" class="button button1" formaction="/submit">
+		</div>
+</div>
+
+		<div>
+			<span th:text="${question.getQstn()}" th:value="${question.id}"><br>question<br> </span>
+				 <span th:each="qstn_option : ${question.qstnOptions}"><br><br>
+				<input type="radio" th:name="optionid"  th:id="${qstn_option.option}"   th:value="${qstn_option.getId()}"
+				th:text="${qstn_option.option}" />
+				</span>
+		</div>
+		
+		<br><br><br>
+		<input type="hidden" th:name="index" th:value="${iterator.nextIndex()}">
+		<input type="hidden" th:name="aOptId" th:value="${attendedOptions[index].id}">
+		<input type="hidden" th:name="aExamId" th:value="${aExamId}">
+		<input type="hidden" th:name="eId" th:value="${exam.getId()}">
+		<input type="submit" class="button button1" th:value="clear" formaction="/clear_option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="submit" id="click" class="button button1" name="button_save" value="save" formaction="/save_option">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="submit"  onclick="check()" class="button button1" th:value="${iterator.hasNext()}==true? next: submit" >
+	
+</form>
+
+</div>
+
+
+<script th:inline="javascript">
+
+/*  var saveOption=false;
+var el = document.getElementById('click');  */
+
+
+let urlstring = window.location.search;
+let urlp=new URLSearchParams(urlstring);
+let ms=urlp.get('timerValue');
+let mseconds=0;
+if(ms==null)
+	{
+	 mseconds = hourToMiliSeconds([[${exam.getTime()}]]);
+	}
+	else
+	{
+		mseconds=ms;
+	}
+
+
+function timer() {
+	mseconds = mseconds - 1000;
+	  if(mseconds > 0) {
+	    document.getElementById('timerValue').innerHTML = millisToMinutesAndSeconds(mseconds);
+			document.getElementById('timer').value = mseconds;
+			 window.setTimeout("timer()" , 1000);
+	  } else {
+			document.getElementById('timer').value = 0;	
+			alert('Timed OUt');
+			document.getElementById('myForm').submit();
+		}
+}
+
+function hourToMiliSeconds(hour) {
+	let msecond = 0;
+	let time = hour.split(':');
+	msecond = (time[0] * (60000 * 60)) + (time[1] * 60000);
+	return msecond;
+}
+
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+
+timer();
+
+	/* function check(){
+	  document.getElementById("'option'+${qstn_option.getId()}").checked = true;} */
+  function checked() {
+	  document.getElementById('qstnNo').innerHTML = "Question: "+[[${index}+1]];
+	  var optionId=[[${attendedOptions[index].attendedOpt}]];
+	  document.getElementById(optionId).checked = true;
+	}
+  checked();
+  
+  function showQuestion( aExamId , examId , index) {
+		let url  = "/user_exampage";
+		let params = `aExamId=${aExamId}&eId=${examId}&index=${index}&timerValue=${mseconds}`;
+		window.location = url + '?'+ params;
+	  }
+  function quitExam()
+  {
+	  var r=confirm('do you wish to quit exam!'); if(r == true){return true;} else{return false;}
+  }
+ 
+  /* function check(){
+		if(!saveOption)
+		 alert("you should save the option to continue..")}
+  
+ 
+  el.onclick = function save() {  saveOption=true;}  */
+  
+</script>
+
+
+</body>
+
+
+</html>

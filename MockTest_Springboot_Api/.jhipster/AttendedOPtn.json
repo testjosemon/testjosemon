@@ -1,0 +1,32 @@
+{
+    "name": "AttendedOptn",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "question",
+            "otherEntityRelationshipName": "attendedOptn",
+            "relationshipName": "question",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "attendedExam",
+            "otherEntityRelationshipName": "attendedOptn",
+            "relationshipName": "attendedExam",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200323145400",
+    "entityTableName": "attended_optn",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

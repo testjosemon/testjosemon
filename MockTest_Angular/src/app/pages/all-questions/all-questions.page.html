@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+<<<<<<< HEAD
+      <ion-back-button defaultHref="question"></ion-back-button>
+=======
+      <ion-back-button></ion-back-button>
+>>>>>>> 1953f671dbed23b804d83d9c3a06c519b2767801
+    </ion-buttons>
+    <ion-title>all questions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1953f671dbed23b804d83d9c3a06c519b2767801
+<ion-content>
+  <ion-item  *ngFor="let question of (allQuestions | async),let i=index">
+   <p>
+    <ion-label>{{i+1}}) {{question.qstn}}</ion-label>  
+    <ion-label>{{question.level}}</ion-label>
+    <ion-label *ngFor="let opt of question.qstnOptions,let o=index">&nbsp;&nbsp;{{o+1}}. {{opt.option}}</ion-label>
+  </p> 
+  </ion-item> 
+</ion-content>

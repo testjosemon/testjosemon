@@ -1,0 +1,100 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>AttendedExams</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div  *ngIf="dashboardData; else noDataTemplate">
+    <ion-text color="medium" class="ion-text-center">
+    <h1> Attended Exam Details</h1>
+    </ion-text>
+    <h5>*click on the exam to see the corresponding details for further analysis</h5><br><br>
+
+<div style="overflow-x:auto;">
+
+                      <mat-table [dataSource]="dataSource" class="mat-elevation-z8"  matSort >
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" >   </tr>    
+                        
+                        <ng-container matColumnDef="index">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sl.No  </th>
+                          <td mat-cell *matCellDef="let element,let i = index;"> {{i+1}}  </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="examName">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> ExamName  </th>
+                           <td mat-cell *matCellDef="let element"><a  (click)="examHistory(element.examId)" class="mat-row-link"> {{element.examName}} </a> </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="score">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> score </th>
+                          <td mat-cell *matCellDef="let element"> {{element.score}} / {{element.total}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="percentage">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Percentage  </th>
+                       <td mat-cell *matCellDef="let element"> {{element.percentage}}  </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="result">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Result  </th>
+                          <td mat-cell *matCellDef="let element">{{element.result ==true? 'passed' :'failed'}}  </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dateTime">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> DateTime  </th>
+                          <td mat-cell *matCellDef="let element"> {{element.dateTime}}  </td>
+                        </ng-container>
+
+                      </mat-table>
+                    </div>
+                  </div>
+
+                  <mat-card *ngIf="isLoading" 
+                 style="display: flex; justify-content: center; align-items: center">
+                 <mat-progress-spinner 
+                  color="primary" 
+                   mode="indeterminate">
+                  </mat-progress-spinner>
+                  </mat-card>
+
+                  <ng-template #noDataTemplate>
+                    <div  *ngIf="isEmpty">
+                      <ion-text color="medium" class="ion-text-center">
+                     <h1> No data !!! </h1>
+                      </ion-text>
+                      </div>
+                  </ng-template>
+
+         				  <!-- <table  width=95% border=3px style="font-size: 100%" matSort (matSortChange)="sortData($event)">
+							    <thead>
+							        <tr>
+							            <th> Sl.No. </th>
+							            <th mat-sort-header="examName">Exam Name </th>
+							            <th> Your Score </th>
+							              <th mat-sort-header="percentage"> Percentage </th>
+							              <th> Result </th>
+                            <th mat-sort-header="date">  Date & Time </th>
+                          
+							          </tr>
+                                  </thead>
+                                  <tbody>
+                                    
+                                    <tr  *ngFor="let d of examlist,index as i;">
+                                     <td>{{i+1}}</td> 
+                                     <td><a  (click)="examHistory(d.examId)">{{d.examName}}</a></td>
+                                     <td>{{d.score}} / {{d?.total}}</td>
+                                     <td>{{d.percentage}}</td>
+                                       <td> {{d?.result==true ? 'pass' :'fail'}}</td>  -->
+                                      <!-- <td>{{d.result}}</td>
+                                    <td>{{d.date}} : {{d.time}}</td>
+                                    
+                                    </tbody>
+                   </table></div>  -->
+                   
+</ion-content>

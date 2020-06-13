@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+<meta charset="ISO-8859-1">
+   
+<title>Selected Exam Questions</title>
+</head>
+<body bgcolor="FloralWhite">
+<div class="header">
+	<h2>MockTest Application</h2>
+	<div align="center">
+		Time:- <span th:text="${exam.time} "></span>&nbsp;Hr <br>
+			Level:- <span th:text="${exam.level} ">level</span><br> 
+			Active:- <span	th:text="${exam.isActive} ">active</span>&nbsp;&nbsp; 
+	<button class="button button1"><a th:href="@{/app/activate_exam(eId=${exam.getId()})}">Set <span th:text="!${exam.isIsActive()} "></span></a></button>
+	<div class="topnav">
+		<a class="active" >Lxi Technologies</a>
+  		<a  th:href="@{/}">Home</a>
+  		<a  th:href="@{/current_exams}">Current Exams</a>
+	<a class="logout" th:href="@{/logoutpage}">logout</a></form></div></div>
+			
+			
+		<!-- <span
+			th:if="!${exam.isActive} "><button><a th:href="@{/activate_exam(eId=${exam.getId()})}">activate exam</a></button>
+		</span> -->
+
+		<div align="center">
+
+<h3><u>Questions in Exam - <span th:text="${exam.getName()} ">exam name</span></u></h3>
+</div>
+			
+				
+			
+		
+		
+	
+	 <div class="table-responsive">  
+	<table class="table table-hover" width=100% border=5px>
+    <thead>
+        <tr>
+            <th> Sl.No. </th>
+            <th> Question </th>
+            <th> Option1 </th>
+             <th> Option2 </th>
+              <th> Option3 </th>
+              <th> Answer </th>
+       
+  </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${questions.empty}" align="center">
+            <td colspan="6"> No Questions Available </td>
+        </tr>
+        <tr th:each="qstn ,iterator : ${questions}" align="center">
+        <td th:text="${iterator.index+1}" > Sl.No. </td>
+            <td th:text="${qstn.getQstn()}"> Question </td>
+            <span th:each="q_option : ${qstn.qstnOptions}">
+            	<td th:text="${q_option.option}">option</td></span>
+            	    <span th:each="q_option : ${qstn.qstnOptions}">
+            <span th:if="${q_option.isIsAnswer() == true}">
+           	<td th:text="${q_option.option}"></td></span>
+           </span>
+           
+        </tr>
+    </tbody>
+
+	</table>
+	</div>
+
+</body>
+</html>
